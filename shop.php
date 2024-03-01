@@ -85,7 +85,7 @@
           <div class="d-flex m-3 me-0">
             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
               data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-            <a href="#" class="position-relative me-4 my-auto">
+            <a href="/WebBanThuoc/cart.php" class="position-relative me-4 my-auto">
               <i class="fa fa-shopping-bag fa-2x"></i>
               <span
                 class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
@@ -148,7 +148,7 @@
           <div class="row g-4">
             <div class="col-xl-3">
               <div class="input-group w-100 mx-auto d-flex">
-                <input type="search" class="form-control p-3" placeholder="keywords 111"
+                <input type="search" class="form-control p-3" placeholder="Nhập tên thuốc"
                   aria-describedby="search-icon-1" id="inputSearchShop">
                 <span id="searchShop" class="input-group-text p-3"><i class="fa fa-search"></i></span>
               </div>
@@ -165,6 +165,17 @@
                 </select>
               </div>
             </div>
+          </div>
+          <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 0; right: 0; z-index: 1000;">
+          <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+              <div class="toast-header">
+                  <strong class="me-auto">Thông báo</strong>
+                  <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success" role="alert">
+                  Sản phẩm đã được thêm vào giỏ hàng thành công!
+              </div>
+          </div>
           </div>
           <div class="row g-4">
             <div class="col-lg-3">
@@ -270,20 +281,30 @@
             <div class="col-lg-9">
               <div class="row g-4 justify-content-center">
 
+              <?php
+                  $numOfProductInPage = 1;
+                  $pageNumber = isset($_GET['page']) ? $_GET['page'] : 1;
+                  $offset = ($pageNumber - 1) * $numOfProductInPage;
+                  $totalProducts = $conn->query("SELECT COUNT(*) AS total FROM thuoc")->fetch_assoc()['total'];
+                  $totalPages = ceil($totalProducts / $numOfProductInPage);
+                  
+                  
+                ?>
+
                 <?php
                                      include "connect.php";
                                       $getProductByCategories = "";
                                         if(isset($_GET["cateID"])){
-                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai where thuoc.MaLoai=". $_GET["cateID"];
+                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai where thuoc.MaLoai=". $_GET["cateID"] . "LIMIT $offset, $numOfProductInPage";
                                         }
                                         else{
-                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai";
+                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai LIMIT $offset, $numOfProductInPage";
                                         }
                                         if(isset($_GET["keyword"])){
-                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai where thuoc.TenThuoc LIKE '%" . $_GET["keyword"] . "%'";
+                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai where thuoc.TenThuoc LIKE '%" . $_GET["keyword"] . "%'" . "LIMIT $offset, $numOfProductInPage";
                                         }
                                         else{
-                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai";
+                                            $getProductByCategories = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai LIMIT $offset, $numOfProductInPage";
                                         }
                                         $AllProduct = $conn->query($getProductByCategories);
                                      ?>
@@ -313,7 +334,7 @@
                       <div class="d-flex justify-content-between flex-lg-wrap">
                         <p class="text-dark fs-5 fw-bold mb-0"><?php echo number_format($price, 0, ',', ',');?>VND</p>
 
-                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                        <a href="/WebBanThuoc/addtocart.php?pid=<?php echo $productID?>" id="addToCartBtn" class="btn border border-secondary rounded-pill px-3 text-primary"><i
                             class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                       </div>
                     </div>
@@ -322,17 +343,24 @@
 
                 <?php }?>
 
+              
 
                 <div class="col-12">
                   <div class="pagination d-flex justify-content-center mt-5">
-                    <a href="#" class="rounded">&laquo;</a>
-                    <a href="#" class="active rounded">1</a>
-                    <a href="#" class="rounded">2</a>
-                    <a href="#" class="rounded">3</a>
-                    <a href="#" class="rounded">4</a>
-                    <a href="#" class="rounded">5</a>
-                    <a href="#" class="rounded">6</a>
-                    <a href="#" class="rounded">&raquo;</a>
+                  <?php
+                  // Lấy giá trị của tham số "page" từ URL
+                  $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+                  // Vòng lặp để tạo các liên kết trang
+                  for ($i = 1; $i <= $totalPages; $i++) {
+                      // Kiểm tra nếu $i trùng với trang hiện tại, thêm class "active"
+                      $class = ($i == $current_page) ? 'active' : '';
+                      // In liên kết trang với class được xác định
+                      echo '<a class="rounded ' . $class . '" href="?page=' . $i . '">' . $i . '</a>';
+                  }
+                  ?>
+
+                   
                   </div>
                 </div>
               </div>
@@ -488,6 +516,31 @@
     });
   });
   </script>
+
+<script>
+document.getElementById("addToCartBtn").addEventListener("click", function(event) {
+    // Prevent default action of the link
+    event.preventDefault();
+    
+    // Perform AJAX request to addtocart.php
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "addtocart.php?pid=<?php echo $productID?>", true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            // Parse JSON response
+            var itemArray = JSON.parse(xhr.responseText);
+            // Log itemArray to console
+            console.log(itemArray);
+            var toastEl = document.querySelector('.toast');
+            var toast = new bootstrap.Toast(toastEl);
+            toast.show();
+        }
+    };
+    xhr.send();
+});
+
+
+</script>
 </body>
 
 </html>

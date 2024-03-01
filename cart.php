@@ -1,3 +1,25 @@
+<?php
+     session_start();
+     if (!empty($_GET["action"])) {
+        switch ($_GET["action"]) {
+            case "remove":
+                if (!empty($_SESSION["cart_item"])) {
+                    foreach ($_SESSION["cart_item"] as $k => $v) {
+                        if ($_GET["code"] == $k) {
+                            unset($_SESSION["cart_item"][$k]);
+                        }
+                        if (empty($_SESSION["cart_item"])) {
+                            unset($_SESSION["cart_item"]);
+                        }
+                    }
+                }
+                break;
+            case "empty":
+                unset($_SESSION["cart_item"]);
+                break;
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -139,116 +161,60 @@
                             <th scope="col">Handle</th>
                           </tr>
                         </thead>
+                       
                         <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="img/vegetable-item-3.png" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4">Big Banana</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </td>
-                            
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="img/vegetable-item-5.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4">Potatoes</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="img/vegetable-item-2.jpg" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4">Awesome Brocoli</p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-minus rounded-circle bg-light border" >
-                                            <i class="fa fa-minus"></i>
-                                            </button>
-                                        </div>
-                                        <input type="text" class="form-control form-control-sm text-center border-0" value="1">
-                                        <div class="input-group-btn">
-                                            <button class="btn btn-sm btn-plus rounded-circle bg-light border">
-                                                <i class="fa fa-plus"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4">2.99 $</p>
-                                </td>
-                                <td>
-                                    <button class="btn btn-md rounded-circle bg-light border mt-4" >
-                                        <i class="fa fa-times text-danger"></i>
-                                    </button>
-                                </td>
-                            </tr>
+                        <?php
+if (!empty($_SESSION["cart_item"]) && is_array($_SESSION["cart_item"])) {
+    foreach ($_SESSION["cart_item"] as $item) {
+        // Kiểm tra xem biến $item có phải là một mảng không
+        if (is_array($item)) {
+            // Kiểm tra xem các chỉ mục cần thiết tồn tại trong $item
+            if (isset($item["TenThuoc"]) && isset($item["price"]) && isset($item["SoLuong"])) {
+                // Thực hiện các thao tác với các chỉ mục trong $item
+                $totalPrice = floatval($item["SoLuong"]) * floatval($item["price"]);
+?>
+                <tr>
+                    <th scope="row">
+                        <div class="d-flex align-items-center">
+                            <img src="data:image/png;base64, <?php echo $item["image"]?>" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                        </div>
+                    </th>
+                    <td>
+                        <p class="mb-0 mt-4"><?php echo $item["TenThuoc"]?></p>
+                    </td>
+                    <td>
+                        <p class="mb-0 mt-4 gia-tien"><?php echo $item["price"]?></p>
+                    </td>
+                    <td>
+                    <div class="input-group quantity mt-4" style="width: 100px;">
+                        
+                        <input type="text" class="form-control form-control-sm text-center border-0 quantityInput" value="<?php echo $item["SoLuong"]?>" onchange="updateTotalPrice()">
+                        
+                    </div>
+                </td>
+
+                    <td>
+                        <p class="mb-0 mt-4 total-price"><?php echo $totalPrice?></p>
+                    </td>
+                    <td>
+                        <button class="btn btn-md rounded-circle bg-light border mt-4" >
+                            <a class="fa fa-times text-danger" onclick="deleteItem()" href="?action=remove&code=<?php echo $item["code"];?>"></a>
+                        </button>
+                    </td>
+                </tr>
+<?php
+            } else {
+                echo "Lỗi: Không thể tìm thấy giá trị số lượng, giá tiền hoặc tên thuốc.";
+            }
+        } else {
+            echo "Lỗi: Dữ liệu sản phẩm không hợp lệ.";
+        }
+    }
+} else {
+    echo "Giỏ hàng trống hoặc dữ liệu không hợp lệ.";
+}
+?>
+       
                         </tbody>
                     </table>
                 </div>
@@ -394,6 +360,29 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+    <script>
+    function updateTotalPrice() {
+    // Lấy giá trị mới từ ô input bằng id
+    var input = document.querySelector(".quantityInput");
+    var newQuantity = parseInt(input.value);
+    
+    var giaTien = parseFloat(document.querySelector('.gia-tien').textContent);
+    
+    // Tính toán lại totalPrice
+    var totalPrice = parseInt(newQuantity) * parseFloat(giaTien);
+    
+    // Hiển thị lại totalPrice ở đâu đó trong trang
+    document.querySelector('.total-price').textContent = totalPrice;
+}
+
+function deleteItem() {
+    alert("Xóa thành công");
+    $('#toast').show(); // Hiển thị modal thông báo xóa thành công
+  }
+    </script>
+
+
+
     </body>
 
 </html>

@@ -69,16 +69,21 @@ CREATE TABLE NguoiDung (
     PRIMARY KEY (MaNguoiDung)
 );
 
-
-
 CREATE TABLE HoaDonBanThuoc (
     MaHoaDon INT NOT NULL auto_increment,
-    MaKhachHang INT,
     MaNguoiDung INT,
-    NgayTaoHoaDon DATETIME,
+    NgayTaoHoaDon DATETIME default current_timestamp,
     PRIMARY KEY (MaHoaDon),
-    FOREIGN KEY (MaKhachHang) REFERENCES KhachHang(MaKhachHang),
-    FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung)
+    FOREIGN KEY (MaNguoiDung) REFERENCES NguoiDung(MaNguoiDung),
+    firstname nvarchar(255),
+    lastname nvarchar(255),
+    address nvarchar(255),
+    city nvarchar(255),
+    country nvarchar(255),
+    mobile nvarchar(255),
+    email nvarchar(255),
+    OrderNote nvarchar(255),
+    totalprice nvarchar(255)
 );
 
 CREATE TABLE ChiTietHoaDon (
@@ -86,7 +91,6 @@ CREATE TABLE ChiTietHoaDon (
     MaHoaDon INT,
     MaThuoc INT,
     SoLuong INT,
-    DonGia DECIMAL(10, 3),
     PRIMARY KEY (MaChiTietHoaDon),
     FOREIGN KEY (MaHoaDon) REFERENCES HoaDonBanThuoc(MaHoaDon),
     FOREIGN KEY (MaThuoc) REFERENCES Thuoc(MaThuoc)

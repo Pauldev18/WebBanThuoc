@@ -211,7 +211,7 @@
                 <p class="mb-0 mt-4"><?php echo $item["TenThuoc"]?></p>
               </td>
               <td>
-                <p class="mb-0 mt-4 gia-tien"><?php echo $item["price"]?></p>
+                <p class="mb-0 mt-4 gia-tien"><?php echo number_format($item["price"], 0, ',', ',') ?></p>
               </td>
               <td>
                 <div class="input-group quantity mt-4" style="width: 100px;">
@@ -223,7 +223,7 @@
               </td>
 
               <td>
-                <p class="mb-0 mt-4 total-price"><?php echo $totalPrice?></p>
+                <p class="mb-0 mt-4 total-price"><?php echo number_format($totalPrice, 0, ',', ',')?></p>
               </td>
               <td>
                 <button class="btn btn-md rounded-circle bg-light border mt-4">
@@ -260,19 +260,19 @@
               <h1 class="display-6 mb-4">Cart <span class="fw-normal">Total</span></h1>
               <div class="d-flex justify-content-between mb-4">
                 <h5 class="mb-0 me-4">Subtotal:</h5>
-                <p class="mb-0"><?php echo $PriceAll?> VND</p>
+                <p class="mb-0"><?php echo number_format($PriceAll, 0, ',', ',') ?> VND</p>
               </div>
               <div class="d-flex justify-content-between">
                 <h5 class="mb-0 me-4">Shipping</h5>
                 <div class="">
-                  <p class="mb-0">Flat rate: 20.000 VND</p>
+                  <p class="mb-0">Flat rate: 20,000 VND</p>
                 </div>
               </div>
               <p class="mb-0 text-end">Shipping in VietNam.</p>
             </div>
             <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
               <h5 class="mb-0 ps-4 me-4">Total</h5>
-              <p class="mb-0 pe-4"><?php echo $PriceAll + 20000 ?> VND</p>
+              <p class="mb-0 pe-4"><?php echo number_format($PriceAll + 20000, 0, ',', ',') ?> VND</p>
             </div>
             <a href="/WebBanThuoc/chackout.php"><button
                 class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"

@@ -63,6 +63,7 @@
 
 
   <!-- Navbar start -->
+  <!-- Navbar start -->
   <div class="container-fluid fixed-top">
     <div class="container topbar bg-primary d-none d-lg-block">
       <div class="d-flex justify-content-between">
@@ -91,18 +92,10 @@
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
             <a href="index.php" class="nav-item nav-link ">Home</a>
-            <a href="shop.php" class="nav-item nav-link">Shop</a>
+            <a href="shop.php" class="nav-item nav-link active">Shop</a>
 
-            <div class="nav-item dropdown">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-              <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                <a href="cart.php" class="dropdown-item active">Cart</a>
-                <a href="chackout.php" class="dropdown-item">Chackout</a>
-                <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                <a href="404.php" class="dropdown-item">404 Page</a>
-              </div>
-            </div>
-            <a href="contact.php" class="nav-item nav-link">Contact</a>
+            
+            <a href="testimonial.php" class="nav-item nav-link">Testimonial</a>
           </div>
           <?php
             // Kiểm tra xem $_SESSION["cart_item"] có tồn tại và là một mảng không
@@ -114,21 +107,33 @@
                 // Nếu không tồn tại hoặc không phải một mảng, thực hiện xử lý phù hợp (ví dụ: gán giá trị mặc định cho biến)
                 $count = 0; // Hoặc thực hiện các thao tác khác tùy thuộc vào yêu cầu của bạn
             }
+          ?>
+          
+          <?php
+
+            // Kiểm tra xem session 'cid' đã tồn tại hay không
+            if(isset($_SESSION['cid'])) {
+                // Nếu tồn tại session 'cid', hiển thị div chứa nút tìm kiếm, giỏ hàng và nút đăng nhập
+                echo '<div class="d-flex m-3 me-0">
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                          data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                        <a href="/WebBanThuoc/cart.php" class="position-relative me-4 my-auto">
+                          <i class="fa fa-shopping-bag fa-2x"></i>
+                          <span
+                            class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><?php echo $count?></span>
+                        </a>
+                        <a href="profile.php" class="my-auto">
+                          <i class="fas fa-user fa-2x"></i>
+                        </a>
+                      </div>';
+            } else {
+                // Nếu không tồn tại session 'cid', hiển thị nút đăng nhập
+                echo '<div class="d-flex m-3 me-0"><a href="login.php"><button type="button" class="btn btn-success">Đăng nhập</button></a> </div>';
+            }
             ?>
 
-          <div class="d-flex m-3 me-0">
-            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-              data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-            <a href="#" class="position-relative me-4 my-auto">
-              <i class="fa fa-shopping-bag fa-2x"></i>
-              <span
-                class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><?php echo $count ?></span>
-            </a>
-            <a href="#" class="my-auto">
-              <i class="fas fa-user fa-2x"></i>
-            </a>
-          </div>
+
         </div>
       </nav>
     </div>
@@ -248,10 +253,7 @@
           </tbody>
         </table>
       </div>
-      <div class="mt-5">
-        <input type="text" class="border-0 border-bottom rounded me-5 py-3 mb-4" placeholder="Coupon Code">
-        <button class="btn border-secondary rounded-pill px-4 py-3 text-primary" type="button">Apply Coupon</button>
-      </div>
+      
       <div class="row g-4 justify-content-end">
         <div class="col-8"></div>
         <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
@@ -274,9 +276,16 @@
               <h5 class="mb-0 ps-4 me-4">Total</h5>
               <p class="mb-0 pe-4"><?php echo number_format($PriceAll + 20000, 0, ',', ',') ?> VND</p>
             </div>
-            <a href="/WebBanThuoc/chackout.php"><button
-                class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                type="button">Proceed Checkout</button></a>
+            <?php
+              if(isset($_SESSION["cid"])){
+                  // Nếu session "cid" tồn tại, điều hướng đến checkout.php
+                  echo '<a href="/WebBanThuoc/chackout.php"><button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed Checkout</button></a>';
+              } else {
+                  // Nếu không, điều hướng đến login.php
+                  echo '<a href="/WebBanThuoc/login.php"><button class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Proceed to Login</button></a>';
+              }
+            ?>
+
           </div>
         </div>
       </div>
@@ -376,8 +385,7 @@
           <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
           <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
           <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-          Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a> Distributed By <a
-            class="border-bottom" href="https://themewagon.com">ThemeWagon</a>
+          Designed By <a class="border-bottom" href="https://www.facebook.com/iamdeveloper18">PaulDev</a>
         </div>
       </div>
     </div>

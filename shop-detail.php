@@ -6,7 +6,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>PharmacyShop</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -82,7 +82,7 @@
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
         <a href="index.php" class="navbar-brand">
-          <h1 class="text-primary display-6">Fruitables</h1>
+          <h1 class="text-primary display-6">PharmacyShop</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarCollapse">
@@ -90,8 +90,8 @@
         </button>
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
-            <a href="index.php" class="nav-item nav-link active">Home</a>
-            <a href="shop.php" class="nav-item nav-link ">Shop</a>
+            <a href="index.php" class="nav-item nav-link ">Home</a>
+            <a href="shop.php" class="nav-item nav-link active">Shop</a>
 
             
             <a href="testimonial.php" class="nav-item nav-link">Testimonial</a>
@@ -346,7 +346,9 @@
                                         
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name">
-                                                <a href="shop-detail.php?productID=<?php echo $_GET['productID']; ?>&cateID=<?php echo $id; ?>"><i class="fas fa-apple-alt me-2"></i><?php echo $name?></a>
+                                                <a href="shop-detail.php?productID=<?php echo $_GET['productID']; ?>&cateID=<?php echo $id; ?>"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-capsule" viewBox="0 0 16 16">
+  <path d="M1.828 8.9 8.9 1.827a4 4 0 1 1 5.657 5.657l-7.07 7.071A4 4 0 1 1 1.827 8.9Zm9.128.771 2.893-2.893a3 3 0 1 0-4.243-4.242L6.713 5.429z"/>
+</svg> <?php echo $name?></a>
                                                 
                                             </div>
                                         </li>
@@ -414,9 +416,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="position-relative">
-                                    <img src="img/banner-fruits.jpg" class="img-fluid w-100 rounded" alt="">
+                                    <img src="img/poster.jfif" class="img-fluid w-100 rounded" alt="">
                                     <div class="position-absolute" style="top: 50%; right: 10px; transform: translateY(-50%);">
-                                        <h3 class="text-secondary fw-bold">Fresh <br> Fruits <br> Banner</h3>
+                                        <h3 class="text-secondary fw-bold"></h3>
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +478,7 @@
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <a href="#">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
+                                <h1 class="text-primary mb-0">PharmacyShop</h1>
                                 <p class="text-secondary mb-0">Fresh products</p>
                             </a>
                         </div>

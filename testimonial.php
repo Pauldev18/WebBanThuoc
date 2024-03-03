@@ -6,7 +6,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>PharmacyShop</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -62,7 +62,7 @@
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
         <a href="index.php" class="navbar-brand">
-          <h1 class="text-primary display-6">Fruitables</h1>
+          <h1 class="text-primary display-6">PharmacyShop</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarCollapse">
@@ -248,7 +248,7 @@
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <a href="#">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
+                                <h1 class="text-primary mb-0">PharmacyShop</h1>
                                 <p class="text-secondary mb-0">Fresh products</p>
                             </a>
                         </div>

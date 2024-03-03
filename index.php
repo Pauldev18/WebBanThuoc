@@ -6,7 +6,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>Fruitables - Vegetable Website Template</title>
+        <title>PharmacyShop</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -61,7 +61,7 @@
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
         <a href="index.php" class="navbar-brand">
-          <h1 class="text-primary display-6">Fruitables</h1>
+          <h1 class="text-primary display-6">PharmacyShop</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
           data-bs-target="#navbarCollapse">
@@ -145,8 +145,8 @@
             <div class="container py-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-md-12 col-lg-7">
-                        <h4 class="mb-3 text-secondary">100% Organic Foods</h4>
-                        <h1 class="mb-5 display-3 text-primary">Organic Veggies & Fruits Foods</h1>
+                        <h4 class="mb-3 text-secondary">100% Organic</h4>
+                        <h1 class="mb-5 display-3 text-primary">Organic Pharmacy</h1>
                         <div class="position-relative mx-auto">
                             <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number" placeholder="Search">
                             <button type="submit" class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100" style="top: 0; right: 25%;">Submit Now</button>
@@ -156,12 +156,12 @@
                         <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
                             <div class="carousel-inner" role="listbox">
                                 <div class="carousel-item active rounded">
-                                    <img src="img/hero-img-1.png" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
-                                    <a href="#" class="btn px-4 py-2 text-white rounded">Fruites</a>
+                                    <img src="img/thuocbanner1.jfif" class="img-fluid w-100 h-100 bg-secondary rounded" alt="First slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Cảm</a>
                                 </div>
                                 <div class="carousel-item rounded">
-                                    <img src="img/hero-img-2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
-                                    <a href="#" class="btn px-4 py-2 text-white rounded">Vesitables</a>
+                                    <img src="img/thuocbanner2.jpg" class="img-fluid w-100 h-100 rounded" alt="Second slide">
+                                    <a href="#" class="btn px-4 py-2 text-white rounded">Ho, Sốt</a>
                                 </div>
                             </div>
                             <button class="carousel-control-prev" type="button" data-bs-target="#carouselId" data-bs-slide="prev">
@@ -251,7 +251,7 @@
                 <div class="tab-class text-center">
                     <div class="row g-4">
                         <div class="col-lg-4 text-start">
-                            <h1>Our Organic Products</h1>
+                            <h1>Pharmacy Products</h1>
                         </div>
                         <?php
                             include "connect.php";
@@ -536,10 +536,10 @@
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
                             <div class="service-item bg-secondary rounded border border-secondary">
-                                <img src="img/featur-1.jpg" class="img-fluid rounded-top w-100" alt="">
+                                <img src="img/anhthuoc1.jfif" class="img-fluid rounded-top w-100" alt="">
                                 <div class="px-4 rounded-bottom">
                                     <div class="service-content bg-primary text-center p-4 rounded">
-                                        <h5 class="text-white">Fresh Apples</h5>
+                                        <h5 class="text-white">New</h5>
                                         <h3 class="mb-0">20% OFF</h3>
                                     </div>
                                 </div>
@@ -549,10 +549,10 @@
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
                             <div class="service-item bg-dark rounded border border-dark">
-                                <img src="img/featur-2.jpg" class="img-fluid rounded-top w-100" alt="">
+                                <img src="img/anhthuoc2.jfif" class="img-fluid rounded-top w-100" alt="">
                                 <div class="px-4 rounded-bottom">
                                     <div class="service-content bg-light text-center p-4 rounded">
-                                        <h5 class="text-primary">Tasty Fruits</h5>
+                                        <h5 class="text-primary">Hot</h5>
                                         <h3 class="mb-0">Free delivery</h3>
                                     </div>
                                 </div>
@@ -562,10 +562,10 @@
                     <div class="col-md-6 col-lg-4">
                         <a href="#">
                             <div class="service-item bg-primary rounded border border-primary">
-                                <img src="img/featur-3.jpg" class="img-fluid rounded-top w-100" alt="">
+                                <img src="img/anhthuoc3.jfif" class="img-fluid rounded-top w-100" alt="">
                                 <div class="px-4 rounded-bottom">
                                     <div class="service-content bg-secondary text-center p-4 rounded">
-                                        <h5 class="text-white">Exotic Vegitable</h5>
+                                        <h5 class="text-white">Best seller</h5>
                                         <h3 class="mb-0">Discount 30$</h3>
                                     </div>
                                 </div>
@@ -581,7 +581,7 @@
         <!-- Vesitable Shop Start-->
         <div class="container-fluid vesitable py-5">
             <div class="container py-5">
-                <h1 class="mb-0">Fresh Organic Vegetables</h1>
+                <h1 class="mb-0">Pharmacy Organic</h1>
                 <div class="owl-carousel vegetable-carousel justify-content-center">
                     
                 <?php
@@ -636,15 +636,15 @@
                 <div class="row g-4 align-items-center">
                     <div class="col-lg-6">
                         <div class="py-4">
-                            <h1 class="display-3 text-white">Fresh Exotic Fruits</h1>
+                            <h1 class="display-3 text-white">AyGuPharmacy</h1>
                             <p class="fw-normal display-3 text-dark mb-4">in Our Store</p>
-                            <p class="mb-4 text-dark">The generated Lorem Ipsum is therefore always free from repetition injected humour, or non-characteristic words etc.</p>
-                            <a href="#" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
+                            <p class="mb-4 text-dark">We are a medical facility providing medicine and healthcare services. We have pharmacists and sales staff who provide consultation on medications and health care products.</p>
+                            <a href="shop.php" class="banner-btn btn border-2 border-white rounded-pill text-dark py-3 px-5">BUY</a>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="position-relative">
-                            <img src="img/baner-1.png" class="img-fluid w-100 rounded" alt="">
+                            <img src="img/tải xuống.jfif" class="img-fluid w-100 rounded" alt="">
                             <div class="d-flex align-items-center justify-content-center bg-white rounded-circle position-absolute" style="width: 140px; height: 140px; top: 0; left: 0;">
                                 <h1 style="font-size: 100px;">1</h1>
                                 <div class="d-flex flex-column">
@@ -797,7 +797,7 @@
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <a href="#">
-                                <h1 class="text-primary mb-0">Fruitables</h1>
+                                <h1 class="text-primary mb-0">ParmacyShop</h1>
                                 <p class="text-secondary mb-0">Fresh products</p>
                             </a>
                         </div>

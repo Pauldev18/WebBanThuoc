@@ -62,7 +62,7 @@
     </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <h1 class="text-primary display-6">Fruitables</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -226,12 +226,32 @@
 
                 <div class="col-lg-12">
                   <h4 class="mb-3">Featured products</h4>
+                  <?php
+                                     include "connect.php";
+                                    $getProductAll = "";
+                                        
+                                    $getProductAll = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai";
+                                        
+                                       
+                                        $AllProduct1 = $conn->query($getProductAll);
+                                     ?>
+                <?php
+                                        while($row = $AllProduct1->fetch_assoc())
+                                        {
+                                            $nameProduct = $row['TenThuoc'];
+                                            $nameCate = $row['TenLoai'];
+                                            $imageProduct = $row['Anh'];
+                                            $moTa = $row['Des'];
+                                            $price = $row['GiaTien'];
+                                            $productID = $row['MaThuoc'];
+                                     ?>
+                 
                   <div class="d-flex align-items-center justify-content-start">
                     <div class="rounded me-4" style="width: 100px; height: 100px;">
-                      <img src="img/featur-1.jpg" class="img-fluid rounded" alt="">
+                      <img src="data:image/png;base64, <?php echo $imageProduct?>" class="img-fluid rounded" alt="">
                     </div>
                     <div>
-                      <h6 class="mb-2">Big Banana</h6>
+                      <h6 class="mb-2"><?php echo $nameProduct?></h6>
                       <div class="d-flex mb-2">
                         <i class="fa fa-star text-secondary"></i>
                         <i class="fa fa-star text-secondary"></i>
@@ -240,49 +260,14 @@
                         <i class="fa fa-star"></i>
                       </div>
                       <div class="d-flex mb-2">
-                        <h5 class="fw-bold me-2">2.99 $</h5>
-                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                        <h5 class="fw-bold me-2"><?php echo number_format($price, 0, ',', ',');?>VND</h5>
+                        <h5 class="text-danger text-decoration-line-through"><?php echo number_format($price + 20/100*$price , 0, ',', ',');?>VND</h5>
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex align-items-center justify-content-start">
-                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                      <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-                    </div>
-                    <div>
-                      <h6 class="mb-2">Big Banana</h6>
-                      <div class="d-flex mb-2">
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <div class="d-flex mb-2">
-                        <h5 class="fw-bold me-2">2.99 $</h5>
-                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center justify-content-start">
-                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                      <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-                    </div>
-                    <div>
-                      <h6 class="mb-2">Big Banana</h6>
-                      <div class="d-flex mb-2">
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star text-secondary"></i>
-                        <i class="fa fa-star"></i>
-                      </div>
-                      <div class="d-flex mb-2">
-                        <h5 class="fw-bold me-2">2.99 $</h5>
-                        <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                      </div>
-                    </div>
-                  </div>
+                  <?php }?>
+
+                  
                   <div class="d-flex justify-content-center my-4">
                     <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew
                       More</a>
@@ -554,10 +539,7 @@
         var toastEl = document.querySelector('.toast');
         var toast = new bootstrap.Toast(toastEl);
         toast.show();
-        setTimeout(function() {
-          // Reload the page after performing AJAX request
-          window.location.reload();
-        }, 800); // Delay reload for 3 seconds
+       
       }
 
     };

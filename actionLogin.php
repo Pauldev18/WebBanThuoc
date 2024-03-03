@@ -8,7 +8,7 @@
     if($result->num_rows == 1){
         $row = $result->fetch_assoc();
         $_SESSION["cid"] = $row["MaNguoiDung"];
-        header("Location: shop.php"); // Redirect to a success page
+        header("Location: index.php"); // Redirect to a success page
         exit();
     }
     else{

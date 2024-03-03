@@ -64,7 +64,7 @@
     </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <h1 class="text-primary display-6">Fruitables</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -161,9 +161,20 @@
         $row = $result -> fetch_assoc();
     }
   ?>
+ <?php
 
+if (!isset($_SESSION["CustomerDetail_edit_error"])) {
+    $_SESSION["CustomerDetail_edit_error"] = " ";
+}
+if (!isset($_SESSION["Password_edit_error"])) {
+    $_SESSION["Password_edit_error"] = " ";
+}
+?>
   <!-- Fruits Shop Start-->
   <div class="container fruite py-5">
+  <center>
+        <font color=red><?php echo $_SESSION["CustomerDetail_edit_error"]; ?></font>
+    </center>
   <div class="user-content row">
             <div class="side-menu col-md-3 sol-sm-12">
                 <div class="submenu">
@@ -207,7 +218,34 @@
         </div>
   </div>
   <!-- Fruits Shop End-->
+<!-- Modal chỉnh sửa mật khẩu -->
+<div id="id02" class="modal">
+  <form class="modal-content animate" action="Password_edit_action.php?cid=<?php echo $row['MaNguoiDung'] ?>" method="post">
+      <div class="imgcontainer">
+          <span onclick="document.getElementById('id02').style.display='none'" class="close"
+              title="Close Modal">&times;</span>
+      </div>
 
+      <div class="input-content">
+          <label for="address"><b>Mật khẩu cũ:</b></label>
+          <input class="login-input" type="text" name="txtOldpassword" id="psw" required>
+
+          <label for="address"><b>Mật khẩu mới:</b></label>
+          <input class="login-input" type="text" name="txtNewpassword1" id="psw" required>
+
+          <label for="address"><b>Xác nhận mật khẩu mới:</b></label>
+          <input class="login-input" type="text" name="txtNewpassword2" id="psw" required>
+      </div>
+      <div class="group-button row">
+          <div class="col-md-2 col-sm-0"></div>
+          <button type="button" class="btn btn-outline-danger col-md-3"
+              onclick="document.getElementById('id02').style.display='none'">Huỷ</button>
+          <div class="col-md-2 col-sm-0"></div>
+          <button type="submit" class="btn btn-success col-md-3">Cập Nhật</button>
+          <div class="col-md-2 col-sm-0"></div>
+      </div>
+  </form>
+</div>
   <!-- Modal chỉnh sửa thông tin cá nhân -->
   <div id="id01" class="modal">
 
@@ -220,7 +258,7 @@
     <div class="input-content">
 
         <label for="phone"><b>Họ và tên:</b></label>
-        <input class="login-input" type="text" value="<?php echo $row['TenNguoiDung'] ?>" name="numCphone"
+        <input class="login-input" type="text" value="<?php echo $row['TenNguoiDung'] ?>" name="txtHoTen"
             id="psw" required>
 
         <label for="gender"><b>Email:</b></label>
@@ -295,36 +333,7 @@
 
     </div>
   <br><br><br><br>
-<!-- Modal chỉnh sửa mật khẩu -->
-<div id="id02" class="modal">
 
-<form class="modal-content animate" action=""
-    method="post">
-    <div class="imgcontainer">
-        <span onclick="document.getElementById('id02').style.display='none'" class="close"
-            title="Close Modal">&times;</span>
-    </div>
-
-    <div class="input-content">
-        <label for="address"><b>Mật khẩu cũ:</b></label>
-        <input class="login-input" type="text" name="txtOldpassword" id="psw" required>
-
-        <label for="address"><b>Mật khẩu mới:</b></label>
-        <input class="login-input" type="text" name="txtNewpassword1" id="psw" required>
-
-        <label for="address"><b>Xác nhận mật khẩu mới:</b></label>
-        <input class="login-input" type="text" name="txtNewpassword2" id="psw" required>
-    </div>
-    <div class="group-button row">
-        <div class="col-md-2 col-sm-0"></div>
-        <button type="button" class="btn btn-outline-danger col-md-3"
-            onclick="document.getElementById('id02').style.display='none'">Huỷ</button>
-        <div class="col-md-2 col-sm-0"></div>
-        <button type="submit" class="btn btn-success col-md-3">Cập Nhật</button>
-        <div class="col-md-2 col-sm-0"></div>
-    </div>
-</form>
-</div>
 
   <!-- Footer Start -->
   <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5">

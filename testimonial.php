@@ -61,7 +61,7 @@
     </div>
     <div class="container px-0">
       <nav class="navbar navbar-light bg-white navbar-expand-xl">
-        <a href="index.html" class="navbar-brand">
+        <a href="index.php" class="navbar-brand">
           <h1 class="text-primary display-6">Fruitables</h1>
         </a>
         <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
@@ -71,10 +71,10 @@
         <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
           <div class="navbar-nav mx-auto">
             <a href="index.php" class="nav-item nav-link ">Home</a>
-            <a href="shop.php" class="nav-item nav-link active">Shop</a>
+            <a href="shop.php" class="nav-item nav-link ">Shop</a>
 
             
-            <a href="testimonial.php" class="nav-item nav-link">Testimonial</a>
+            <a href="testimonial.php" class="nav-item nav-link active">Testimonial</a>
           </div>
           <?php
             // Kiểm tra xem $_SESSION["cart_item"] có tồn tại và là một mảng không

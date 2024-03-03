@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -46,59 +49,95 @@
             <div class="spinner-grow text-primary" role="status"></div>
         </div>
         <!-- Spinner End -->
-
+        <div aria-live="polite" aria-atomic="true" style="position: fixed; bottom: 0; right: 0; z-index: 1000;">
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+              <div class="toast-header">
+                <strong class="me-auto">Thông báo</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+              </div>
+              <div class="alert alert-success" role="alert">
+                Sản phẩm đã được thêm vào giỏ hàng thành công!
+              </div>
+            </div>
+        </div>
 
         <!-- Navbar start -->
         <div class="container-fluid fixed-top">
-            <div class="container topbar bg-primary d-none d-lg-block">
-                <div class="d-flex justify-content-between">
-                    <div class="top-info ps-2">
-                        <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#" class="text-white">123 Street, New York</a></small>
-                        <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#" class="text-white">Email@Example.com</a></small>
-                    </div>
-                    <div class="top-link pe-2">
-                        <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
-                        <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
-                    </div>
-                </div>
-            </div>
-            <div class="container px-0">
-                <nav class="navbar navbar-light bg-white navbar-expand-xl">
-                    <a href="index.html" class="navbar-brand"><h1 class="text-primary display-6">Fruitables</h1></a>
-                    <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-                        <span class="fa fa-bars text-primary"></span>
-                    </button>
-                    <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
-                        <div class="navbar-nav mx-auto">
-                            <a href="index.php" class="nav-item nav-link ">Home</a>
-                            <a href="shop.php" class="nav-item nav-link">Shop</a>
-                           
-                            <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                                <div class="dropdown-menu m-0 bg-secondary rounded-0">
-                                    <a href="cart.php" class="dropdown-item">Cart</a>
-                                    <a href="chackout.php" class="dropdown-item">Chackout</a>
-                                    <a href="testimonial.php" class="dropdown-item">Testimonial</a>
-                                    <a href="404.php" class="dropdown-item">404 Page</a>
-                                </div>
-                            </div>
-                            <a href="contact.php" class="nav-item nav-link">Contact</a>
-                        </div>
-                        <div class="d-flex m-3 me-0">
-                            <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
-                            <a href="/WebBanThuoc/cart.php" class="position-relative me-4 my-auto">
-                                <i class="fa fa-shopping-bag fa-2x"></i>
-                                <span class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1" style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
-                            </a>
-                            <a href="#" class="my-auto">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
-                        </div>
-                    </div>
-                </nav>
-            </div>
+    <div class="container topbar bg-primary d-none d-lg-block">
+      <div class="d-flex justify-content-between">
+        <div class="top-info ps-2">
+          <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
+              class="text-white">123 Street, New York</a></small>
+          <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
+              class="text-white">Email@Example.com</a></small>
         </div>
+        <div class="top-link pe-2">
+          <a href="#" class="text-white"><small class="text-white mx-2">Privacy Policy</small>/</a>
+          <a href="#" class="text-white"><small class="text-white mx-2">Terms of Use</small>/</a>
+          <a href="#" class="text-white"><small class="text-white ms-2">Sales and Refunds</small></a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="container px-0">
+      <nav class="navbar navbar-light bg-white navbar-expand-xl">
+        <a href="index.php" class="navbar-brand">
+          <h1 class="text-primary display-6">Fruitables</h1>
+        </a>
+        <button class="navbar-toggler py-2 px-3" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarCollapse">
+          <span class="fa fa-bars text-primary"></span>
+        </button>
+        <div class="collapse navbar-collapse bg-white" id="navbarCollapse">
+          <div class="navbar-nav mx-auto">
+            <a href="index.php" class="nav-item nav-link active">Home</a>
+            <a href="shop.php" class="nav-item nav-link ">Shop</a>
+
+            
+            <a href="testimonial.php" class="nav-item nav-link">Testimonial</a>
+          </div>
+          <?php
+            // Kiểm tra xem $_SESSION["cart_item"] có tồn tại và là một mảng không
+            if(isset($_SESSION["cart_item"]) && is_array($_SESSION["cart_item"])) {
+                // Nếu tồn tại và là một mảng, thực hiện các thao tác với nó ở đây
+                $count = count($_SESSION["cart_item"]);
+                // Tiếp tục xử lý biến $_SESSION["cart_item"]
+            } else {
+                // Nếu không tồn tại hoặc không phải một mảng, thực hiện xử lý phù hợp (ví dụ: gán giá trị mặc định cho biến)
+                $count = 0; // Hoặc thực hiện các thao tác khác tùy thuộc vào yêu cầu của bạn
+            }
+          ?>
+          
+          <?php
+
+            // Kiểm tra xem session 'cid' đã tồn tại hay không
+            if(isset($_SESSION['cid'])) {
+                // Nếu tồn tại session 'cid', hiển thị div chứa nút tìm kiếm, giỏ hàng và nút đăng nhập
+                echo '<div class="d-flex m-3 me-0">
+                        <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
+                          data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
+                        <a href="/WebBanThuoc/cart.php" class="position-relative me-4 my-auto">
+                          <i class="fa fa-shopping-bag fa-2x"></i>
+                          <span
+                            class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
+                            style="top: -5px; left: 15px; height: 20px; min-width: 20px;"><?php echo $count?></span>
+                        </a>
+                        <a href="profile.php" class="my-auto">
+                          <i class="fas fa-user fa-2x"></i>
+                        </a>
+                        
+                      </div>';
+            } else {
+                // Nếu không tồn tại session 'cid', hiển thị nút đăng nhập
+                echo '<div class="d-flex m-3 me-0"><a href="login.php"><button type="button" class="btn btn-success">Đăng nhập</button></a> </div>';
+            }
+            ?>
+
+
+        </div>
+      </nav>
+    </div>
+  </div>
         <!-- Navbar End -->
 
 
@@ -283,6 +322,11 @@
                             </form>
                         </div>
                     </div>
+                    <?php
+            include "connect.php";
+            $listDanhMucThuoc = $conn->query("select * from danhmucthuoc") ;
+
+        ?>
                     <div class="col-lg-4 col-xl-3">
                         <div class="row g-4 fruite">
                             <div class="col-lg-12">
@@ -293,47 +337,62 @@
                                 <div class="mb-4">
                                     <h4>Categories</h4>
                                     <ul class="list-unstyled fruite-categorie">
+                                    <?php
+                                                while($getAllDanhMucThuoc = $listDanhMucThuoc->fetch_assoc())
+                                                { 
+                                                    $name = $getAllDanhMucThuoc['TenLoai'];
+                                                    $id = $getAllDanhMucThuoc['MaLoai'];
+                                            ?>
+                                        
                                         <li>
                                             <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Apples</a>
-                                                <span>(3)</span>
+                                                <a href="shop-detail.php?productID=<?php echo $_GET['productID']; ?>&cateID=<?php echo $id; ?>"><i class="fas fa-apple-alt me-2"></i><?php echo $name?></a>
+                                                
                                             </div>
                                         </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Oranges</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Strawbery</a>
-                                                <span>(2)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Banana</a>
-                                                <span>(8)</span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="d-flex justify-content-between fruite-name">
-                                                <a href="#"><i class="fas fa-apple-alt me-2"></i>Pumpkin</a>
-                                                <span>(5)</span>
-                                            </div>
-                                        </li>
+                                        <?php
+                                                } 
+                                            ?>
                                     </ul>
                                 </div>
                             </div>
                             <div class="col-lg-12">
                                 <h4 class="mb-4">Featured products</h4>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-1.jpg" class="img-fluid rounded" alt="Image">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
+                               
+                              
+                                
+                                
+                               
+                                <?php
+                                     include "connect.php";
+                                    $getProductAll = "";
+                                    if(isset($_GET["cateID"])){
+                                        $getProductAll = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai where thuoc.MaLoai=" . $_GET["cateID"];
+                                    }
+                                    else{
+                                        $getProductAll = "select * FROM thuoc JOIN danhmucthuoc ON thuoc.MaLoai = danhmucthuoc.MaLoai";
+                                    }
+                                        
+                                       
+                                        $AllProduct1 = $conn->query($getProductAll);
+                                     ?>
+                                    <?php
+                                        while($row = $AllProduct1->fetch_assoc())
+                                        {
+                                            $nameProduct = $row['TenThuoc'];
+                                            $nameCate = $row['TenLoai'];
+                                            $imageProduct = $row['Anh'];
+                                            $moTa = $row['Des'];
+                                            $price = $row['GiaTien'];
+                                            $productID = $row['MaThuoc'];
+                                     ?>
+                 
+                                    <div class="d-flex align-items-center justify-content-start">
+                                        <div class="rounded me-4" style="width: 100px; height: 100px;">
+                                        <img src="data:image/png;base64, <?php echo $imageProduct?>" class="img-fluid rounded" alt="">
+                                        </div>
+                                        <div>
+                                        <h6 class="mb-2"><?php echo $nameProduct?></h6>
                                         <div class="d-flex mb-2">
                                             <i class="fa fa-star text-secondary"></i>
                                             <i class="fa fa-star text-secondary"></i>
@@ -342,106 +401,13 @@
                                             <i class="fa fa-star"></i>
                                         </div>
                                         <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
+                                            <h5 class="fw-bold me-2"><?php echo number_format($price, 0, ',', ',');?>VND</h5>
+                                            <h5 class="text-danger text-decoration-line-through"><?php echo number_format($price + 20/100*$price , 0, ',', ',');?>VND</h5>
+                                        </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-2.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded" style="width: 100px; height: 100px;">
-                                        <img src="img/featur-3.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/vegetable-item-4.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/vegetable-item-5.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="d-flex align-items-center justify-content-start">
-                                    <div class="rounded me-4" style="width: 100px; height: 100px;">
-                                        <img src="img/vegetable-item-6.jpg" class="img-fluid rounded" alt="">
-                                    </div>
-                                    <div>
-                                        <h6 class="mb-2">Big Banana</h6>
-                                        <div class="d-flex mb-2">
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star text-secondary"></i>
-                                            <i class="fa fa-star"></i>
-                                        </div>
-                                        <div class="d-flex mb-2">
-                                            <h5 class="fw-bold me-2">2.99 $</h5>
-                                            <h5 class="text-danger text-decoration-line-through">4.11 $</h5>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <?php }?>
+
                                 <div class="d-flex justify-content-center my-4">
                                     <a href="#" class="btn border border-secondary px-4 py-3 rounded-pill text-primary w-100">Vew More</a>
                                 </div>
@@ -486,7 +452,9 @@
                                 <p><?php echo $desRelated; ?></p>
                                 <div class="d-flex justify-content-between flex-lg-wrap">
                                     <p class="text-dark fs-5 fw-bold"><?php echo number_format($priceRelated, 0, ',', ',');?>VND</p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 py-1 mb-4 text-primary"><i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+                                    <a href="/WebBanThuoc/addtocart2.php?productID=<?php echo $pID?>" id="addToCartBtn"
+                                    class="btn border border-secondary rounded-pill px-3 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
                                 </div>
                             </div>
                         </div>
@@ -635,6 +603,8 @@
     });
   });
   </script>
+    
+
     </body>
 
 </html>
